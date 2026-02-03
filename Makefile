@@ -70,8 +70,12 @@ $(TEST_BIN): $(TEST_SRC) $(LIB)
 	$(CC) $(CFLAGS) -o $@ $< -L. -ltqdb
 
 # Query tests (requires TQDB_ENABLE_QUERY=1)
-test-query: TQDB_ENABLE_QUERY=1
-test-query: clean $(TEST_QUERY_BIN)
+# Use recursive make to ensure the variable is set at parse time
+test-query:
+	$(MAKE) clean
+	$(MAKE) TQDB_ENABLE_QUERY=1 _test-query-run
+
+_test-query-run: $(TEST_QUERY_BIN)
 	./$(TEST_QUERY_BIN)
 
 $(TEST_QUERY_BIN): $(TEST_QUERY_SRC) $(LIB)
