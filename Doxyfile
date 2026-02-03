@@ -1,0 +1,62 @@
+# Doxyfile for tqdb
+
+# Project information
+PROJECT_NAME           = "tqdb"
+PROJECT_BRIEF          = "Technically Qualifies as a Database - Portable trait-based file database"
+PROJECT_NUMBER         =
+OUTPUT_DIRECTORY       = docs
+
+# Input files
+INPUT                  = tqdb.h src
+FILE_PATTERNS          = *.h *.c
+RECURSIVE              = YES
+EXCLUDE_PATTERNS       = */test/*
+
+# Output settings
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+HTML_OUTPUT            = html
+
+# Extraction settings
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+
+# Documentation settings
+BRIEF_MEMBER_DESC      = YES
+REPEAT_BRIEF           = YES
+ALWAYS_DETAILED_SEC    = NO
+INLINE_INHERITED_MEMB  = NO
+FULL_PATH_NAMES        = NO
+JAVADOC_AUTOBRIEF      = YES
+MULTILINE_CPP_IS_BRIEF = NO
+TAB_SIZE               = 4
+OPTIMIZE_OUTPUT_FOR_C  = YES
+MARKDOWN_SUPPORT       = YES
+
+# Warning settings
+QUIET                  = NO
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = NO
+WARN_IF_DOC_ERROR      = YES
+
+# Source browsing
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+STRIP_CODE_COMMENTS    = YES
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+
+# Graph settings (requires graphviz)
+HAVE_DOT               = YES
+DOT_NUM_THREADS        = 0
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+DOT_IMAGE_FORMAT       = svg
+INTERACTIVE_SVG        = YES
+DOT_TRANSPARENT        = YES
+
+# Index settings
+ALPHABETICAL_INDEX     = YES
+GENERATE_TREEVIEW      = YES

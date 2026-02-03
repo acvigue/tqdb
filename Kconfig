@@ -1,0 +1,74 @@
+menu "TQDB Configuration"
+
+    config TQDB_ENABLE_WAL
+        bool "Enable Write-Ahead Logging"
+        default y
+        help
+            Enable WAL for fast writes and crash recovery.
+            Disabling saves ~18KB but removes WAL functionality.
+
+    config TQDB_ENABLE_CACHE
+        bool "Enable Read Cache"
+        default y
+        depends on TQDB_ENABLE_WAL
+        help
+            Enable LRU cache for frequently accessed entities.
+            Requires WAL to be enabled.
+
+    config TQDB_ENABLE_QUERY
+        bool "Enable Query System"
+        default n
+        help
+            Enable the lightweight query system for field-based filtering.
+            Adds support for operators: EQ, NE, LT, LE, GT, GE, BETWEEN, LIKE.
+            Increases code size by approximately 6-7KB.
+
+    config TQDB_QUERY_MAX_CONDITIONS
+        int "Maximum query conditions"
+        default 8
+        range 1 32
+        depends on TQDB_ENABLE_QUERY
+        help
+            Maximum number of WHERE conditions per query.
+            Each condition uses approximately 40 bytes of stack.
+
+    config TQDB_MAX_ENTITY_TYPES
+        int "Maximum entity types"
+        default 8
+        range 1 32
+        help
+            Maximum number of different entity types that can be registered.
+
+    config TQDB_DEFAULT_SCRATCH_SIZE
+        int "Default scratch buffer size"
+        default 8192
+        range 1024 65536
+        help
+            Default size of the internal scratch buffer for serialization.
+            Can be overridden per-database in tqdb_config_t.
+
+    config TQDB_WAL_MAX_ENTRIES_DEFAULT
+        int "WAL auto-checkpoint entry threshold"
+        default 100
+        range 10 10000
+        help
+            Auto-checkpoint WAL when this many entries accumulate.
+            Lower values reduce crash recovery time but increase I/O.
+
+    config TQDB_WAL_MAX_SIZE_DEFAULT
+        int "WAL auto-checkpoint size threshold (bytes)"
+        default 65536
+        range 4096 1048576
+        help
+            Auto-checkpoint WAL when file size exceeds this threshold.
+            Lower values reduce flash usage but increase I/O.
+
+    config TQDB_CACHE_SIZE_DEFAULT
+        int "Default cache size (entities)"
+        default 16
+        range 0 256
+        help
+            Default number of entities to cache in memory.
+            Set to 0 to disable caching by default.
+
+endmenu

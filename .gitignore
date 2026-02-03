@@ -1,0 +1,30 @@
+# Build artifacts
+*.o
+*.a
+src/*.o
+
+# Test binaries
+test/test_tqdb
+test/test_query
+test/test_stress
+
+# Debug symbols (macOS)
+*.dSYM/
+
+# Test database files
+test/*.tqdb
+test/*.tqdb.*
+
+# Generated documentation
+docs/html/
+docs/latex/
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
